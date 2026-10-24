@@ -1,71 +1,96 @@
 /**
- * Design Tokens - KoJaPu News
- * Single source of truth for colors, typography, spacing, and styling tokens.
- * Enforced by redesign-skill rules: no hardcoded colors in component files.
+ * Design Tokens - Nordic Broadsheet Editorial System (Pohjola Post / KoJaPu)
+ * Single source of truth for colors, typography scale, spacing tokens, and radii.
+ * Enforced by redesign-skill rules: No hardcoded colors in component files.
  */
 
 export const colors = {
   primary: {
-    DEFAULT: '#29ecdb',
-    hover: '#1cd6c5',
-    active: '#14bdae',
-    subtle: 'rgba(41, 236, 219, 0.12)',
-    border: 'rgba(41, 236, 219, 0.3)',
-    glow: '0 0 16px rgba(41, 236, 219, 0.35)',
+    DEFAULT: '#000000',
+    on: '#ffffff',
+    container: '#1c1b1b',
+    onContainer: '#858383',
   },
-  neutral: {
-    bg: '#ffffff',
-    surface: '#ffffff',
-    surfaceSubtle: '#f8fafc',
-    border: '#e2e8f0',
-    borderSubtle: '#f1f5f9',
-    textPrimary: '#0f172a',
-    textSecondary: '#475569',
-    textMuted: '#94a3b8',
+  secondary: {
+    DEFAULT: '#5e5e5e',
+    on: '#ffffff',
+    container: '#e2e2e2',
+    onContainer: '#646464',
   },
-  dark: {
-    bg: '#090d16',
-    surface: '#0f172a',
-    surfaceSubtle: '#1e293b',
-    border: '#1e293b',
-    borderSubtle: '#334155',
-    textPrimary: '#f8fafc',
-    textSecondary: '#cbd5e1',
-    textMuted: '#64748b',
+  surface: {
+    DEFAULT: '#f9f9f9',
+    bright: '#f9f9f9',
+    dim: '#dadada',
+    containerLowest: '#ffffff',
+    containerLow: '#f3f3f3',
+    container: '#eeeeee',
+    containerHigh: '#e8e8e8',
+    containerHighest: '#e2e2e2',
   },
-  accent: {
-    live: '#ef4444',
-    badge: '#29ecdb',
+  onSurface: {
+    DEFAULT: '#1a1c1c',
+    variant: '#444748',
+    muted: '#747878',
   },
+  outline: {
+    DEFAULT: '#747878',
+    variant: '#c4c7c7',
+  },
+  background: {
+    DEFAULT: '#f9f9f9',
+    on: '#1a1c1c',
+  },
+  status: {
+    error: '#ba1a1a',
+    errorContainer: '#ffdad6',
+    live: '#000000',
+    pulse: '#000000',
+  },
+} as const;
+
+export const spacingTokens = {
+  gutter: '1.5rem',       // 24px
+  gutterMobile: '1rem',   // 16px
+  margin: '3rem',         // 48px
+  marginMobile: '1.25rem',// 20px
+  xs: '0.25rem',          // 4px
+  sm: '0.5rem',           // 8px
+  md: '1rem',             // 16px
+  lg: '1.5rem',           // 24px
+  xl: '2.5rem',           // 40px
 } as const;
 
 export const typography = {
-  logo: {
-    fontFamily: 'var(--font-sans)',
-    size: 'text-2xl sm:text-3xl',
-    weight: 'font-extrabold',
-    tracking: 'tracking-tight',
+  headline: {
+    displayHero: 'font-headline text-[36px] md:text-[56px] leading-[42px] md:leading-[64px] tracking-tight font-normal',
+    xl: 'font-headline text-[28px] md:text-[40px] leading-[34px] md:leading-[48px] tracking-tight font-normal',
+    lg: 'font-headline text-[32px] leading-[38px] tracking-tight font-normal',
+    md: 'font-headline text-[24px] leading-[30px] tracking-tight font-medium',
+    sm: 'font-headline text-[19px] leading-[26px] tracking-tight font-medium',
   },
-  navLink: {
-    desktop: 'text-sm font-semibold tracking-wider uppercase',
-    mobile: 'text-xs font-medium',
+  body: {
+    lead: 'font-headline text-[20px] leading-[32px] tracking-normal font-normal',
+    md: 'font-body text-[16px] leading-[26px] tracking-normal font-normal',
+    sm: 'font-body text-[14px] leading-[22px] tracking-normal font-normal',
   },
-  meta: {
-    size: 'text-xs',
-    weight: 'font-medium',
-    tracking: 'tracking-wide',
+  label: {
+    lg: 'font-body text-[13px] leading-[18px] tracking-wider uppercase font-semibold',
+    md: 'font-body text-[11px] leading-[16px] tracking-widest uppercase font-semibold',
   },
+  caption: 'font-body text-[12px] leading-[18px] tracking-normal font-normal',
 } as const;
 
 export const radii = {
-  sm: 'rounded-md',
-  md: 'rounded-lg',
-  lg: 'rounded-xl',
-  full: 'rounded-full',
+  default: 'rounded',     // 0.25rem
+  lg: 'rounded-lg',       // 0.5rem
+  xl: 'rounded-xl',       // 0.75rem
+  '2xl': 'rounded-2xl',   // 1rem
+  full: 'rounded-full',   // 9999px
 } as const;
 
 export const layoutTokens = {
-  headerHeight: 'h-auto',
+  headerHeight: 'h-20',
+  maxWidth: 'max-w-[1440px]',
   mobileBottomNavHeight: 'h-16',
   mobilePaddingBottom: 'pb-20 md:pb-0',
 } as const;

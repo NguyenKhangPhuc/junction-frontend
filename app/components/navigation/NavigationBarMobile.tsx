@@ -1,31 +1,14 @@
 'use client';
 
-import { useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NavItem, NavigationProps } from './types';
-import { typography } from '@/constants/design-tokens';
-
-const subscribe = () => () => {};
-
-function getFormattedMobileDate() {
-  return new Intl.DateTimeFormat('en-US', {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric',
-  }).format(new Date());
-}
 
 export function NavigationBarMobile({
   items,
-  projectName = 'KoJaPu',
+  projectName = 'Pohjola Post',
 }: NavigationProps) {
   const pathname = usePathname();
-  const currentDateString = useSyncExternalStore(
-    subscribe,
-    getFormattedMobileDate,
-    () => 'Today'
-  );
 
   const isItemActive = (href: string) => {
     if (href === '/') {
@@ -34,10 +17,9 @@ export function NavigationBarMobile({
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
-  // Helper icons for mobile navigation items
   const renderItemIcon = (href: string, active: boolean) => {
     const iconClass = `w-5 h-5 transition-transform duration-200 ${
-      active ? 'scale-110 text-primary' : 'text-text-secondary'
+      active ? 'scale-110 text-primary' : 'text-on-surface-variant'
     }`;
 
     if (href === '/') {
@@ -78,7 +60,6 @@ export function NavigationBarMobile({
       );
     }
 
-    // Default icon for About or other routes
     return (
       <svg
         className={iconClass}
@@ -99,29 +80,47 @@ export function NavigationBarMobile({
 
   return (
     <div className="md:hidden">
-      {/* Top Mobile Bar: Brand & Status */}
-      <div className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-surface/95 backdrop-blur-md border-b border-border">
+      {/* Top Mobile Masthead */}
+      <div className="fixed top-0 left-0 right-0 z-40 h-14 bg-surface/90 backdrop-blur-xl border-b border-surface-container-high px-4 flex items-center justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+          className="flex items-center gap-2.5 focus:outline-none"
           aria-label={`${projectName} Homepage`}
         >
-          <span className={`${typography.logo.size} ${typography.logo.weight} text-foreground`}>
+          <div className="w-7 h-7 rounded bg-primary flex items-center justify-center text-on-primary font-headline text-sm font-bold">
+            P
+          </div>
+          <span className="font-headline text-[20px] font-medium tracking-tight text-primary">
             {projectName}
           </span>
-          <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_var(--color-primary)]" />
         </Link>
 
-        <div className="flex items-center gap-2 text-[11px] text-text-muted">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-          <span className="truncate max-w-[150px]">{currentDateString}</span>
+        <div className="flex items-center gap-2">
+          <span className="font-body text-[10px] uppercase tracking-wider text-secondary">
+            Helsinki 02°C
+          </span>
+          <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-on-primary text-xs">
+            <svg
+              className="w-3.5 h-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>
+          </div>
         </div>
       </div>
 
-      {/* Bottom Mobile Navigation Bar: Items Placed At The Bottom as requested */}
+      {/* Bottom Mobile Navigation Bar */}
       <nav
         aria-label="Mobile Bottom Navigation"
-        className="fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-lg border-t border-border shadow-lg pb-[max(env(safe-area-inset-bottom),0px)]"
+        className="fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-surface-container-high shadow-lg pb-[max(env(safe-area-inset-bottom),0px)]"
       >
         <div className="grid grid-cols-3 h-16 max-w-md mx-auto">
           {items.map((item: NavItem) => {
@@ -131,28 +130,20 @@ export function NavigationBarMobile({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative flex flex-col items-center justify-center min-h-[48px] px-2 py-1 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-                  active ? 'text-primary' : 'text-text-secondary hover:text-primary'
-                }`}
                 aria-current={active ? 'page' : undefined}
+                className={`relative flex flex-col items-center justify-center min-h-[48px] px-2 py-1 transition-colors duration-200 focus:outline-none ${
+                  active ? 'text-primary' : 'text-on-surface-variant hover:text-primary'
+                }`}
               >
-                {/* Active Indicator Top Glow */}
                 {active && (
-                  <span className="absolute top-0 inset-x-6 h-0.5 bg-primary rounded-full shadow-[0_0_8px_var(--color-primary)]" />
+                  <span className="absolute top-0 inset-x-8 h-0.5 bg-primary rounded-full" />
                 )}
 
-                <div className="relative mb-1">
-                  {renderItemIcon(item.href, active)}
-                  {item.badge && (
-                    <span className="absolute -top-1 -right-2 px-1 py-0.2 text-[9px] font-bold rounded-full bg-primary text-black">
-                      {item.badge}
-                    </span>
-                  )}
-                </div>
+                <div className="mb-1">{renderItemIcon(item.href, active)}</div>
 
                 <span
-                  className={`text-[11px] tracking-wide transition-all ${
-                    active ? 'font-bold text-primary' : 'font-medium text-text-secondary'
+                  className={`font-body text-[11px] uppercase tracking-wider ${
+                    active ? 'font-bold text-primary' : 'font-medium text-on-surface-variant'
                   }`}
                 >
                   {item.label}
@@ -165,3 +156,5 @@ export function NavigationBarMobile({
     </div>
   );
 }
+
+export default NavigationBarMobile;

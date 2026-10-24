@@ -1,35 +1,22 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-import { NavigationBarServer } from "./components/navigation/navigationbarserver";
+import type { Metadata } from 'next';
+import './globals.css';
+import { NavigationBarServer } from './components/navigation/navigationbarserver';
+import { QueryProvider } from './providers/QueryProvider';
 
 export const metadata: Metadata = {
-  title: "KoJaPu - News & Editorial Insights",
-  description: "Modern news and editorial insights platform powered by KoJaPu",
+  title: 'Pohjola Post • Independent Nordic Dispatches',
+  description: 'Authoritative regional analysis, cultural inquiry, and Nordic journalism.',
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        <NavigationBarServer />
-        <main className="flex-1 pb-20 md:pb-0">{children}</main>
+    <html lang="en" className="h-full antialiased">
+      <body className="min-h-full flex flex-col bg-background font-body text-on-surface">
+        <QueryProvider>
+          <NavigationBarServer />
+          <main className="flex-1 pb-20 md:pb-0">{children}</main>
+        </QueryProvider>
       </body>
     </html>
   );
 }
-
