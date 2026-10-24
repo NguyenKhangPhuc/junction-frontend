@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { NavigationBarClient } from './NavigationBarClient';
 import { NavigationBarMobile } from './NavigationBarMobile';
 import { NavItem } from './types';
@@ -19,10 +20,10 @@ export function NavigationBarServer({
   projectName = 'Pohjola Post',
 }: NavigationBarServerProps) {
   return (
-    <>
+    <Suspense fallback={null}>
       <NavigationBarClient items={items} projectName={projectName} />
       <NavigationBarMobile items={items} projectName={projectName} />
-    </>
+    </Suspense>
   );
 }
 

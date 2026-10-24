@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { videoApi } from '../services/api';
+import { videoApi, DubbingProgressEvent } from '../services/api';
 import { VideoProcessRequest } from '../types/api';
 
 export const videoKeys = {
@@ -57,7 +57,7 @@ export function useUploadVideo() {
 }
 
 /**
- * Hook to trigger the AI Dubbing pipeline for a video
+ * Hook to trigger the AI Dubbing pipeline for a video (Standard)
  */
 export function useProcessDubbing() {
   const queryClient = useQueryClient();
@@ -66,6 +66,38 @@ export function useProcessDubbing() {
     mutationFn: (payload: VideoProcessRequest) => videoApi.processDubbing(payload),
     onSuccess: (data) => {
       // Refresh video details and available dubbed languages
+      queryClient.invalidateQueries({ queryKey: videoKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: videoKeys.detail(data.video_id) });
+      queryClient.invalidateQueries({ queryKey: videoKeys.dubbed(data.video_id) });
+    },
+  });
+}
+
+/**
+ * Hook to trigger the AI Dubbing pipeline with real-time SSE progress streaming via Axios
+ */
+export function useProcessDubbingStream(options?: {
+  onProgress?: (event: DubbingProgressEvent) => void;
+}) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      payload,
+      onProgress,
+      signal,
+    }: {
+      payload: VideoProcessRequest;
+      onProgress?: (event: DubbingProgressEvent) => void;
+      signal?: AbortSignal;
+    }) =>
+      videoApi.processDubbingStream(
+        payload,
+        onProgress || options?.onProgress,
+        signal
+      ),
+    onSuccess: (data) => {
+      // Invalidate queries to immediately refresh video details and dubbed language tracks
       queryClient.invalidateQueries({ queryKey: videoKeys.lists() });
       queryClient.invalidateQueries({ queryKey: videoKeys.detail(data.video_id) });
       queryClient.invalidateQueries({ queryKey: videoKeys.dubbed(data.video_id) });
