@@ -47,8 +47,11 @@ export function useUploadVideo() {
       articleId?: number;
       originalLanguage?: string;
     }) => videoApi.upload(file, articleId, originalLanguage),
-    onSuccess: () => {
+    onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: videoKeys.lists() });
+      if (variables.articleId) {
+        queryClient.invalidateQueries({ queryKey: ['articles'] });
+      }
     },
   });
 }
