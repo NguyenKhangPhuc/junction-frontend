@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useArticles } from './hooks/useArticles';
 import { RegionalDispatch, ArticleResponse } from './types/api';
+import { SemanticSearchBar } from './components/search/SemanticSearchBar';
 
 /**
  * Curated Regional Dispatches Mock Data for Oulu, Tampere, Turku, Rovaniemi, and Espoo
@@ -216,6 +217,13 @@ export default function Home() {
               </span>
             </div>
           </div>
+        </section>
+
+        {/* -------------------------------------------------------------
+         * SEMANTIC SIMILARITY SEARCH BAR (intfloat/multilingual-e5-large)
+         * ------------------------------------------------------------*/ }
+        <section className="w-full max-w-[1440px] mx-auto px-gutter-mobile lg:px-margin pb-6 z-30 relative">
+          <SemanticSearchBar />
         </section>
 
         {/* -------------------------------------------------------------
