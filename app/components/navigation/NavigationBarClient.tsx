@@ -14,7 +14,21 @@ export function NavigationBarClient({
     if (href === '/') {
       return pathname === '/';
     }
+    if (href.startsWith('/#')) {
+      return false;
+    }
     return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.includes('#news') && pathname === '/') {
+      e.preventDefault();
+      const el = document.getElementById('news');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState(null, '', '#news');
+      }
+    }
   };
 
   return (
@@ -45,6 +59,7 @@ export function NavigationBarClient({
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 aria-current={active ? 'page' : undefined}
                 className={`font-body text-[13px] leading-[18px] uppercase tracking-wider transition-colors pb-0.5 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-sm ${
                   active

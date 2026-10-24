@@ -15,8 +15,10 @@ export function useArticles() {
   return useQuery({
     queryKey: articleKeys.lists(),
     queryFn: () => articleApi.getAll(),
-    retry: 1,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: 2,
+    staleTime: 0,
+    refetchOnMount: 'always',
+    refetchOnWindowFocus: true,
   });
 }
 
@@ -41,6 +43,22 @@ export function useCreateArticle() {
     mutationFn: (data: ArticleCreateRequest) => articleApi.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: articleKeys.lists() });
+    },
+  });
+}
+
+/**
+ * Hook to update an existing article
+ */
+export function useUpdateArticle() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, data }: { id: number; data: ArticleCreateRequest }) =>
+      articleApi.update(id, data),
+    onSuccess: (updatedArticle) => {
+      queryClient.invalidateQueries({ queryKey: articleKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: articleKeys.detail(updatedArticle.id) });
     },
   });
 }

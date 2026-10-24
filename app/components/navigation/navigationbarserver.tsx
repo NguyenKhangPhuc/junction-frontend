@@ -4,7 +4,8 @@ import { NavItem } from './types';
 
 const defaultNavItems: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'News', href: '/news' },
+  { label: 'News', href: '/#news' },
+  { label: 'Create Article', href: '/create-article' },
   { label: 'About', href: '/about' },
 ];
 

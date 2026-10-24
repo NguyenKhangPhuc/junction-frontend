@@ -174,7 +174,7 @@ export function SemanticSearchBar() {
                         </h4>
 
                         {/* Content Excerpt */}
-                        <p className="font-body text-xs sm:text-sm leading-relaxed text-on-surface-variant mt-1.5 line-clamp-2">
+                        <p className="font-body text-xs sm:text-sm leading-relaxed text-on-surface-variant mt-1.5 line-clamp-3 whitespace-pre-line">
                           {article.content}
                         </p>
                       </div>

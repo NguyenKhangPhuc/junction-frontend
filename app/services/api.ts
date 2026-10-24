@@ -11,21 +11,49 @@ import {
   VideoProcessResponse,
 } from '../types/api';
 
+const formatApiBaseUrl = (raw?: string): string => {
+  const fallback = 'http://localhost:5605/api';
+  if (!raw) return fallback;
+  const cleaned = raw.trim().replace(/\/+$/, '');
+  return cleaned.endsWith('/api') ? cleaned : `${cleaned}/api`;
+};
+
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5605/api',
+  baseURL: formatApiBaseUrl(process.env.NEXT_PUBLIC_API_URL),
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000,
+  timeout: 30000,
 });
+
+// Centralized error logging interceptor
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        `[API Error] ${error.config?.method?.toUpperCase()} ${error.config?.baseURL || ''}${error.config?.url || ''} failed (HTTP ${error.response?.status || 'Network/Timeout'}):`,
+        error.response?.data || error.message
+      );
+    } else {
+      console.error('[API Error] Request failed:', error);
+    }
+    return Promise.reject(error);
+  }
+);
 
 /** -------------------------------------------------------------
  * ARTICLE SERVICES
  * ------------------------------------------------------------*/
 export const articleApi = {
   create: async (data: ArticleCreateRequest): Promise<ArticleResponse> => {
-    const res = await apiClient.post<ArticleResponse>('/articles', data);
-    return res.data;
+    try {
+      const res = await apiClient.post<ArticleResponse>('/articles', data);
+      return res.data;
+    } catch (error) {
+      console.error('[articleApi.create] Failed to create article in backend:', error);
+      throw error;
+    }
   },
 
   getAll: async (): Promise<ArticleResponse[]> => {
@@ -36,6 +64,16 @@ export const articleApi = {
   getById: async (articleId: number): Promise<ArticleDetailResponse> => {
     const res = await apiClient.get<ArticleDetailResponse>(`/articles/${articleId}`);
     return res.data;
+  },
+
+  update: async (articleId: number, data: ArticleCreateRequest): Promise<ArticleResponse> => {
+    try {
+      const res = await apiClient.put<ArticleResponse>(`/articles/${articleId}`, data);
+      return res.data;
+    } catch (error) {
+      console.error(`[articleApi.update] Failed to update article ${articleId}:`, error);
+      throw error;
+    }
   },
 
   delete: async (articleId: number): Promise<MessageResponse> => {

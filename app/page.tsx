@@ -20,7 +20,7 @@ const fallbackRegionalDispatches: RegionalDispatch[] = [
     topic: 'Bothnian Bay',
     title: 'Oulu: Quantum Computing Hub Opens Near Bothnian Bay',
     excerpt:
-      'A consortium of wireless researchers and cryogenic engineers launch the largest non-capital supercomputing cluster in the Nordic zone.',
+      'A consortium of wireless researchers, cryogenic engineers, and university laboratory directors launch the largest non-capital supercomputing cluster in the Nordic zone, integrating high-frequency 6G testbeds with ultra-low thermal qubit cryostats operating at 15 millikelvin.',
     imageUrl:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuBKRjelwsYdCGqp7Yh4Q_grOGdJN3z-vHSQqtjsu3e5jfOPucr1f-SO5qrEXB4OxV8RZVwyO_l30DpoVqVYpTgXUJ_hzmkRvsJah_iXvi0uGdR57vMkuM56ey5mTCPthnPnyvNewZJpzzNw0Az0erOHJ_1gdCMfHC2YFXmd0QLulkY2h-TL_MCt1PCcpoe_LOSBW2ywZSm3L9Boke8XN1mshKST3AgwWOzbrAfXsGOJ3M597A-DmMyfQg',
     imageAlt: 'Oulu technological hub near water',
@@ -36,7 +36,7 @@ const fallbackRegionalDispatches: RegionalDispatch[] = [
     topic: 'Capital District',
     title: 'Helsinki: Historic Harbor Revitalization Unveils Carbon-Neutral Promenade',
     excerpt:
-      'The South Quay transformation integrates sea-water heat recovery and completely pedestrianized wooden public spaces along the Baltic coastline.',
+      'The South Quay transformation integrates district sea-water heat recovery and completely pedestrianized timber public plazas along the Baltic coastline, demonstrating an innovative blueprint for emission-neutral coastal infrastructure across Northern European capitals.',
     imageUrl:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuANOhuvCEUfzW4z1sqXAzoPwJP27lPhWxCgYpTOoLeYYysuKXlXvMRa6s_fGNdZQP6S21Cv8Y3APm3Iqgi87ozeqhV6g0Gn_rn9rLtz3_uo0EzI5rV8K6n6iKJQsH8DGiNM_D5Dxmix7nCKU3APXlW1uZ18BC2ZuINwvKkRd8B_Acr8G1gkFOnmlYSM04x8SmK9GDCAM9a165SOD4a4ARvyOFzWd4hWyJizOQ5HMBdk5Gipgtpj1DRo_A',
     imageAlt: 'Helsinki harbor revitalization',
@@ -52,7 +52,7 @@ const fallbackRegionalDispatches: RegionalDispatch[] = [
     topic: 'Pirkanmaa',
     title: 'Tampere: The Tramway Architecture Transforming Modern Urbanism',
     excerpt:
-      'Connecting industrial heritage redbrick districts to lakeside residential zones, Tampere’s expanded rail sets a blueprint for secondary European cities.',
+      'Connecting historical red-brick industrial mill districts to lakeside residential zones, Tampere’s expanded electric light rail network sets an international standard for modal shift in mid-sized cities, cutting regional commuter vehicular transit by forty percent.',
     imageUrl:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuDykeBrbSpy_gMopSR6sf0tPS8gVVPmX0Erv4Fz6OVJY88EdPiULnBEeTNfHuFIFUEhLBhObv4zv5Afo9lW09d6Z_m1q19OYuh71JrpYHd0D1OTg-bSrz0YgIaNv2l8V8JcGKAWqw7nz4NzSQZJjRr-Tomi-dgejIr5t2N05b19ymin7MYS5iYQ41IxmFLgLUK0F2wFZzwQtV1HjKqoAlaDgfzRpsbcPC6hen9X1uzgCmqqpgg80OXz1A',
     imageAlt: 'Tampere modern tram architecture',
@@ -68,7 +68,7 @@ const fallbackRegionalDispatches: RegionalDispatch[] = [
     topic: 'Southwest Finland',
     title: 'Turku: Autonomous Archipelago Shipping Trials Conclude Phase One',
     excerpt:
-      'Zero-emission electric cargo barges navigating 20,000 islands along the archipelago corridor successfully log three months without human override.',
+      'Zero-emission electric freight barges navigating through twenty thousand rugged islands in the Baltic archipelago corridor successfully log three consecutive months without human navigational override, guided by edge-computed sonar and dynamic ice-clearing algorithms.',
     imageUrl:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuBA2lsqDp4zreXqBfKqiz34ZKW4GxRJ_qhvxKKaqff0t_8-hQu7TWCV3adFlh5kGYtmbJXX7q1ZC6thj0JD43IWq92xT0TSP7WI5yK1oTABRsnQAErR-5uUNa_Vjd127QxQrWhp_kcLmnTt1-kdbjId6a8kxeUTNEQeMhqjPEWL0xDIxP93qICIVtoFCjNREiL0Rif9uwNDgngklQmkWilOsWmJycRjtsPvgX02I93Ezgqo4yn9roH9AA',
     imageAlt: 'Turku Aura River and maritime heritage',
@@ -84,7 +84,7 @@ const fallbackRegionalDispatches: RegionalDispatch[] = [
     topic: 'Lapland',
     title: 'Rovaniemi: Sámi Cultural Archive Digitizes Centuries of Oral Law',
     excerpt:
-      'The northern university repository partners with Arctic communities to build an immutable cryptographic record of traditional land stewardship.',
+      'The northern university repository partners with Arctic indigenous communities to establish an immutable cryptographic database of customary reindeer herding rights, traditional ecological knowledge, and oral stewardship jurisprudence spanning five centuries.',
     imageUrl:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuCAjOQ5M2mOoTor0HrWSyfe58ifM-ntWbwxs-n-BpJSlb7hUlrn2a6dgdulxDCg-AT54QJ_o3Bp6V3E6J5ajdcoa37yV2BfR-mLfHEou5CWfEePzDSWw9T_zEtaGia_6x7gAeynCccM8l2mFJF2XxqDGAL0nZOWX9oFicoBtGfDNUf4u5M8Jnqxn8a02bP5tcejJnp-WOSpJNQ13mHRA5J43Rv0L-DBtxg_ZWeVjeUzhBT3CbS4N6FrzQ',
     imageAlt: 'Rovaniemi Arctic architecture',
@@ -100,7 +100,7 @@ const fallbackRegionalDispatches: RegionalDispatch[] = [
     topic: 'Uusimaa',
     title: 'Espoo: Deep Geothermal Boreholes Reach 6,400-Meter Basalt Heat',
     excerpt:
-      'A district heating initiative in Otaniemi taps deep crust thermal reservoirs, delivering clean baseload energy to 30,000 households without combustion.',
+      'A municipal district heating initiative in Otaniemi successfully penetrates crystalline bedrock to tap natural crustal heat reservoirs, supplying clean uninterrupted baseload thermal power to thirty thousand residential homes with zero combustion emissions.',
     imageUrl:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuDaOiqOCid8zEWb7pTTC2bg2114OJ1Rxn7ty_VNaex_C0J1PX5QPZYsXMMr8LhaJuYxc-srRy3IvEr8ZFfFmaDMI4o2YQ6qjCujBoB0JaGv77-h29RikT2iAkZawHaDzcU2ijW3Dv6ZI_xGhDfnTeA5LHWTme9mANR9jc3DABpZ3xYc2toCD4S_94kSSvBjRA16A0Kxzt-mYhh7Vwq9xbKOpS1NPwLFDP4BuelIp7KwQuoB9cHeGnqBGQ',
     imageAlt: 'Espoo innovation ecosystem and university campus',
@@ -419,7 +419,7 @@ export default function Home() {
                     </div>
 
                     <Link
-                      href="/news"
+                      href="#news"
                       className="inline-flex items-center gap-2 bg-primary text-on-primary px-space-lg py-2.5 rounded-xl font-body text-[13px] leading-[18px] uppercase tracking-wider font-semibold hover:bg-neutral-800 transition-all shadow-sm"
                     >
                       <span>Read Full Coverage</span>
@@ -444,7 +444,10 @@ export default function Home() {
         {/* -------------------------------------------------------------
          * REGIONAL DISPATCHES / CITIES OF FINLAND SECTION
          * ------------------------------------------------------------*/ }
-        <section className="w-full max-w-[1440px] mx-auto px-gutter-mobile lg:px-margin py-space-xl">
+        <section
+          id="news"
+          className="w-full max-w-[1440px] mx-auto px-gutter-mobile lg:px-margin py-space-xl scroll-mt-24"
+        >
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
             <div className="space-y-space-xs">

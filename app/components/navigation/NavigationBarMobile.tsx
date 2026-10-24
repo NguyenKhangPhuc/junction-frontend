@@ -14,7 +14,21 @@ export function NavigationBarMobile({
     if (href === '/') {
       return pathname === '/';
     }
+    if (href.startsWith('/#')) {
+      return false;
+    }
     return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.includes('#news') && pathname === '/') {
+      e.preventDefault();
+      const el = document.getElementById('news');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState(null, '', '#news');
+      }
+    }
   };
 
   const renderItemIcon = (href: string, active: boolean) => {
@@ -41,7 +55,7 @@ export function NavigationBarMobile({
       );
     }
 
-    if (href.startsWith('/news')) {
+    if (href.startsWith('/news') || href.includes('news')) {
       return (
         <svg
           className={iconClass}
@@ -55,6 +69,25 @@ export function NavigationBarMobile({
             strokeLinecap="round"
             strokeLinejoin="round"
             d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+          />
+        </svg>
+      );
+    }
+
+    if (href.includes('create')) {
+      return (
+        <svg
+          className={iconClass}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={active ? 2.5 : 2}
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
           />
         </svg>
       );
@@ -122,7 +155,11 @@ export function NavigationBarMobile({
         aria-label="Mobile Bottom Navigation"
         className="fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-surface-container-high shadow-lg pb-[max(env(safe-area-inset-bottom),0px)]"
       >
-        <div className="grid grid-cols-3 h-16 max-w-md mx-auto">
+        <div
+          className={`grid h-16 max-w-md mx-auto ${
+            items.length === 4 ? 'grid-cols-4' : items.length === 5 ? 'grid-cols-5' : 'grid-cols-3'
+          }`}
+        >
           {items.map((item: NavItem) => {
             const active = isItemActive(item.href);
 
@@ -130,19 +167,20 @@ export function NavigationBarMobile({
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 aria-current={active ? 'page' : undefined}
-                className={`relative flex flex-col items-center justify-center min-h-[48px] px-2 py-1 transition-colors duration-200 focus:outline-none ${
+                className={`relative flex flex-col items-center justify-center min-h-[48px] px-1 py-1 transition-colors duration-200 focus:outline-none ${
                   active ? 'text-primary' : 'text-on-surface-variant hover:text-primary'
                 }`}
               >
                 {active && (
-                  <span className="absolute top-0 inset-x-8 h-0.5 bg-primary rounded-full" />
+                  <span className="absolute top-0 inset-x-4 h-0.5 bg-primary rounded-full" />
                 )}
 
-                <div className="mb-1">{renderItemIcon(item.href, active)}</div>
+                <div className="mb-0.5">{renderItemIcon(item.href, active)}</div>
 
                 <span
-                  className={`font-body text-[11px] uppercase tracking-wider ${
+                  className={`font-body text-[10px] sm:text-[11px] uppercase tracking-wider truncate max-w-[80px] text-center ${
                     active ? 'font-bold text-primary' : 'font-medium text-on-surface-variant'
                   }`}
                 >
